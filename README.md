@@ -45,3 +45,12 @@ mongoimport --db m201 --collection people --drop --file people.json
     }
   })
 ```
+
+### HW_3:
+1) Lab 3.1:
+```bash
+mongoimport --db m201 --collection restaurants  --drop --file restaurants.json
+
+> var exp = db.restaurants.explain("executionStats")
+> exp.find({ "address.state": "NY", stars: { $gt: 3, $lt: 4 } }).sort({ name: 1 }).hint({ "address.state": 1, "stars": 1, "name": 1})
+```
