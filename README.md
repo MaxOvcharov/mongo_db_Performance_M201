@@ -54,3 +54,12 @@ mongoimport --db m201 --collection restaurants  --drop --file restaurants.json
 > var exp = db.restaurants.explain("executionStats")
 > exp.find({ "address.state": "NY", stars: { $gt: 3, $lt: 4 } }).sort({ name: 1 }).hint({ "address.state": 1, "stars": 1, "name": 1})
 ```
+
+### HW_4:
+1) Lab 4.1: Equality, Sort, Range:
+```bash
+mongoimport --db m201 --collection accounts  --drop --file accounts.json
+
+> db.accounts.find({accountBalance : {$gte : NumberDecimal(100000.00)}, city: "New York"}).sort({lastName: 1, firstName: 1})
+> db.people.createIndex({ city: 1, lastName: 1, firstName: 1, accountBalance: 1 })
+```
