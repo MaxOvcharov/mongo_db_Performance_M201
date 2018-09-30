@@ -61,5 +61,16 @@ mongoimport --db m201 --collection restaurants  --drop --file restaurants.json
 mongoimport --db m201 --collection accounts  --drop --file accounts.json
 
 > db.accounts.find({accountBalance : {$gte : NumberDecimal(100000.00)}, city: "New York"}).sort({lastName: 1, firstName: 1})
-> db.people.createIndex({ city: 1, lastName: 1, firstName: 1, accountBalance: 1 })
+> db.accounts.createIndex({ city: 1, lastName: 1, firstName: 1, accountBalance: 1 })
+```
+2) Lab 4.2: Aggregation Performance:
+```bash
+mongoimport --db m201 --collection restaurants  --drop --file restaurants.json
+> db.restaurants.aggregate([
+  {$match: {stars: {$gt: 2}}},
+  {$sort: {stars: 1},
+  {$group: {_id: "$cuisine", count: {$sum: 1}}}
+])
+> db.restaurants.createIndex({"stars": 1})
+
 ```
